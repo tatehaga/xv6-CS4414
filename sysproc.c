@@ -7,6 +7,7 @@
 #include "mmu.h"
 #include "proc.h"
 
+uint numwrites;
 int
 sys_fork(void)
 {
@@ -88,6 +89,14 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+int
+sys_writecount(void)
+{
+	uint xwrites;
+	xwrites = numwrites;
+	return xwrites;
 }
 
 int

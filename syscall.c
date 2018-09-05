@@ -102,6 +102,7 @@ extern int sys_sleep(void);
 extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
+extern int sys_writecount(void);
 extern int sys_uptime(void);
 extern int sys_yield(void);
 extern int sys_shutdown(void);
@@ -130,6 +131,7 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_yield] sys_yield,
 [SYS_shutdown] sys_shutdown,
+[SYS_writecount] sys_writecount,
 };
 
 void

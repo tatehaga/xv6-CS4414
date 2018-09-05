@@ -175,6 +175,7 @@ UPROGS=\
 	_stressfs\
 	_usertests\
 	_wc\
+	_writetests\
 	_zombie\
         _shutdown\
 
