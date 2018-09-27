@@ -88,7 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-
+  p->tickets = 10;
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -199,6 +199,7 @@ fork(void)
   np->sz = curproc->sz;
   np->parent = curproc;
   *np->tf = *curproc->tf;
+  np->tickets = curproc->tickets;
 
   // Clear %eax so that fork returns 0 in the child.
   np->tf->eax = 0;
@@ -531,4 +532,25 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+int settickets(int number){
+  struct proc *p = myproc();
+  p->tickets = number;
+  return 0;
+}
+
+int getprocessesinfo(struct processes_info *p){
+
+  struct proc *process;
+  int proc_count = 0;
+  acquire(&ptable.lock);
+  for(process = ptable.proc; process < &ptable.proc[NPROC]; process++){
+    if(process->state == UNUSED)
+      continue;
+    else
+      proc_count++;
+    
+  }
+  return 0;
 }

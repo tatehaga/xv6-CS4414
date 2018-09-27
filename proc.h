@@ -49,7 +49,17 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  int tickets;                 // scheduler tickets
+  int ticks;                   // number of times scheduled
 };
+
+struct processes_info {
+    int num_processes;
+    int pids[NPROC];       
+    int ticks[NPROC];       // ticks = number of times process has been scheduled
+    int tickets[NPROC];     // tickets = number of tickets set by settickets()
+};
+
 
 // Process memory is laid out contiguously, low addresses first:
 //   text

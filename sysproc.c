@@ -111,3 +111,22 @@ int sys_shutdown(void)
   shutdown();
   return 0;
 }
+
+int sys_settickets(void)
+{
+  int number;
+
+  if(argint(0, &number) < 0)
+    return -1;
+  return settickets(number);
+  
+}
+
+int sys_getprocessesinfo(void)
+{
+  struct processes_info *pi;
+
+  if(argptr(0,(void*) &pi, sizeof(struct processes_info) < 0))
+    return -1;
+  return getprocessesinfo(pi);
+}
